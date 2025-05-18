@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fastapi
+  namespace: fastapi-postgres-namespace
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: fastapi
+  template:
+    metadata:
+      labels:
+        app: fastapi
+    spec:
+      containers:
+        - name: fastapi
+          image: maxjokar2020/kubernetes-devops-project_fastapi:latest
+          ports:
+            - containerPort: 5000
+          # env:
+          #     - name: POSTGRES_USER
+          #       valueFrom:
+          #         secretKeyRef:
+          #           name: postgres-secret
+          #           key: POSTGRES_USER
+          #     - name: POSTGRES_PASSWORD
+          #       valueFrom:
+          #         secretKeyRef:
+          #           name: postgres-secret
+          #           key: POSTGRES_PASSWORD
+          #     - name: POSTGRES_DB
+          #       valueFrom:
+          #         configMapKeyRef:
+          #           name: postgres-config
+          #           key: POSTGRES_DB
+              # - name: DATABASE_USER
+              #   valueFrom:
+              #     configMapKeyRef:
+              #       name: postgres-config
+              #       key: DATABASE_USER
+              # - name: DATABASE_URL
+              #   valueFrom:
+              #     configMapKeyRef:
+              #       name: postgres-config
+              #       key: DATABASE_URL
+              # - name: POSTGRES_HOST
+              #   valueFrom:
+              #     configMapKeyRef:
+              #       name: postgres-config
+              #       key: POSTGRES_HOST
+              # - name: POSTGRES_PORT
+              #   valueFrom:
+              #     configMapKeyRef:
+              #       name: postgres-config
+              #       key: POSTGRES_PORT
